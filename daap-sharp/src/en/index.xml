@@ -1,0 +1,29 @@
+<Overview>
+  <Assemblies>
+    <Assembly Name="daap-sharp" Version="0.0.0.0" />
+  </Assemblies>
+  <Remarks>
+  </Remarks>
+  <Copyright>2005 James Willcox &lt;snorp@snorp.net&gt;</Copyright>
+  <Types>
+    <Namespace Name="DAAP">
+      <Type Name="ContentException" />
+      <Type Name="Client" />
+      <Type Name="Database" />
+      <Type Name="Playlist" />
+      <Type Name="Server" />
+      <Type Name="Song" />
+      <Type Name="Service" />
+      <Type Name="ServiceLocator" />
+      <Type Name="SongHandler" />
+      <Type Name="PlaylistHandler" />
+      <Type Name="PlaylistSongHandler" />
+      <Type Name="ServiceHandler" />
+      <Type Name="AuthenticationMethod" />
+      <Type Name="AuthenticationException" />
+      <Type Name="LoginException" />
+      <Type Name="ServiceArgs" />
+    </Namespace>
+  </Types>
+  <Title>daap-sharp</Title>
+</Overview>

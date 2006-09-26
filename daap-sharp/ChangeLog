@@ -1,0 +1,240 @@
+2006-09-26  James Willcox  <snorp@snorp.net>
+
+	* src/ContentFetcher.cs: set ServicePoint connection limit to 3.
+	We effectively waste one by having the '/update' request, so it's
+	easy to run out.
+
+2006-09-26  James Willcox  <snorp@snorp.net>
+
+	* src/User.cs: added, represents a user connected to the server
+	* src/Server.cs: add user login/logout events as well as a Users
+	property for obtaining the list of logged-in users.
+
+2006-09-24  James Willcox  <snorp@snorp.net>
+
+	* src/Client.cs: kill all connections to the server before logging out.
+
+2006-09-23  James Willcox  <snorp@snorp.net>
+
+	* src/ContentFetcher.cs: correctly close the in-progress requests
+
+2006-09-18  James Willcox  <snorp@snorp.net>
+
+	* src/Server.cs: only password protect the /login path
+	iTunes only passes the HTTP password there, and assumes the
+	session id is good enough after that.
+
+2006-08-06  James Willcox  <snorp@snorp.net>
+
+	* src/Server.cs: when opening tracks for streaming, use FileAccess.Read
+	* src/ContentCodeBag.cs: don't specify the 'content-code' embedded
+	resource specifically since when building on Windows it gets assigned
+	a totally outrageous name.
+
+2006-07-13  James Willcox  <snorp@snorp.net>
+
+	* src/ContentCodeBag.cs: add some missing content codes for use
+	with iPhoto
+
+2006-07-13  James Willcox  <snorp@snorp.net>
+
+	* src/Database.cs: make the events conform to the standard
+	framework design guidelines (added TrackArgs and PlaylistArgs)
+
+2006-07-07  James Willcox  <snorp@snorp.net>
+	
+	* configure.ac: require the latest Avahi, and bump to 0.3.4
+	* src/Server.cs: don't crash if Stop is called more than once
+
+2006-05-24  James Willcox  <snorp@snorp.net>
+
+	* src/Server.cs: add a SongRequested event to Server, so apps
+	can do logging or whatever when a song is requested.
+
+2006-05-07  James Willcox  <snorp@snorp.net>
+
+	* src/ServiceLocator.cs: make sure we properly dispose of the
+	Avahi.Client when shutting down.
+	* src/Server.cs: ditto
+
+2006-05-07  James Willcox  <snorp@snorp.net>
+
+	* daap-sharp.pc.in: include the .config file
+
+2006-04-07  James Willcox  <snorp@snorp.net>
+
+	* configure.ac: bump to 0.3.3
+
+2006-04-07  James Willcox  <snorp@snorp.net>
+
+	* src/Mono.Zeroconf: synced
+
+2006-04-04  Aaron Bockover  <aaron@abock.org>
+
+	* src/daap-sharp.dll.config.in: Map to libnss_mdns-0.2.so
+
+	* src/Mono.Zeroconf: synced sources
+
+2006-04-04  Aaron Bockover  <aaron@aaronbock.net>
+
+	* src/Server.cs (UnregisterService): handle exception when trying to
+	shutdown the service locator
+
+2006-03-12  James Willcox  <snorp@snorp.net>
+
+	* src/Database.cs: fix DownloadSong()
+	* sample/Mirror.cs: call ServiceLocator.Start (oops)
+
+2006-03-12  James Willcox  <snorp@snorp.net>
+
+	* src/Server.cs: support range requests for seeking, and limit the
+	number of database revisions kept for creating deltas.
+	* src/Client.cs: support seeking (range requests)
+
+2006-03-11  James Willcox  <snorp@snorp.net>
+
+	* src/Mono.Zeroconf/*: updated
+
+2006-03-10  James Willcox  <snorp@snorp.net>
+
+	* configure.ac: bump to 0.3.2
+	* src/ContentParser.cs: add workaround for buggy servers.
+	If a content code can't be found, fallback to our internal one.
+
+2006-03-07  James Willcox  <snorp@snorp.net>
+
+	* src/Mono.Zeroconf/*: Updated (again)
+
+2006-03-07  Aaron Bockover  <aaron@abock.org>
+
+	* src/Mono.Zeroconf/*: Updated Mono.Zeroconf sources (run an A query
+	in DNSServiceQueryRecord to resolve addresses instead of using 
+	gethostbyname)
+
+2006-03-05  Aaron Bockover  <aaron@abock.org>
+
+	* src/Mono.Zeroconf/*: Updated Mono.Zeroconf sources
+
+2006-02-22  James Willcox  <snorp@snorp.net>
+
+	* src/Database.cs (DownloadSong): don't assume that the length
+	argument is valid.
+
+2006-02-21  James Willcox  <snorp@snorp.net>
+
+	* configure.ac: bump to 0.3.1
+	* src/Server.cs: fix a small Uri handling problem which was
+	causing a bug on windows.
+	* src/en/*: updated
+
+2006-02-21  James Willcox  <snorp@snorp.net>
+
+	* src/Mono.Zeroconf/Native.cs: use dnssd.dll as the P/Invoke dll
+	* src/daap-sharp.dll.config.in: update the dllmap
+	* src/Utility.cs: add ToDateTime and FromDateTime
+	* src/*.cs: remove dependence on Mono.Unix
+
+	Make the necessary changes to run on windows
+
+2006-01-20  Aaron Bockover  <aaron@abock.org>
+
+	* src/Mono.ZeroConf/Service.cs (set_HostTarget): Updated Mono.Zeroconf
+	sources	(fix VPN-related DNS resolve bug)
+
+2006-01-20  Aaron Bockover  <aaron@abock.org>
+
+	* sample/SampleServer.cs: Parse the command line a little better; 
+	adds --port, --server-name, --database-name, and --help options
+
+2006-01-19  Aaron Bockover  <aaron@abock.org>
+
+	* src/daap-sharp.dll.config.in: Map to libdns_sd.so
+
+	* src/ServiceLocator.cs: Actually start the browse request
+
+2006-01-19  Aaron Bockover  <aaron@abock.org>
+
+	* configure.ac: Added check for pkg-config to fix package detection
+	bug; Added --enable-mdnsd to skip Avahi check and define ENABLE_MDNSD
+	for compilation 
+
+	* src/Makefile.am: Added files to DISTCLEANFILES so 'make distcheck' 
+	works; build with -debug and link using arguments from 
+	MCS_FLAGS (AVAHI_LIBS) instead of -pkg; compile Mono.Zeroconf 
+	sources into assembly use daap_SCRIPTS instead of daap_DATA to 
+	get a 0755 chmod; install daap-sharp.dll.{mdb,config}
+
+	* src/Server.cs:
+	* src/ServiceLocator.cs: Only compile Avahi-related code if ENABLE_MDNSD
+	is not defined, otherwise, compile the alternate Mono.Zeroconf code; 
+	these changes allow DAAP support to be compatible with Avahi and
+	Apple's mDNSResponder Zerconf implementation; daap-sharp should now
+	be easily portable to OS X and Windows
+
+	* src/daap-sharp.dll.config.in: Added configuration file with DLL map
+	for native mdns calls
+
+	* sample/Makefile.am: Build tests with -debug 
+
+	* sample/SampleServer.cs: Updated to reflect API changes in entagged
+
+	* src/Mono.Zeroconf/*: Added sources for Mono.Zeroconf with a 
+	sync-tree script to update sources from repository for bundling 
+
+2006-01-16  James Willcox  <snorp@snorp.net>
+
+	* src/Server.cs: don't choke when we are listening on a non-specific
+	port.
+
+2006-01-16  James Willcox  <snorp@snorp.net>
+
+	* src/Server.cs: reset the EntryGroup when unregistering the service
+	* src/ServiceLocator.cs: fix a typo causing new services not to
+	show up.
+
+2006-01-14  Aaron Bockover  <aaron@aaronbock.net>
+
+	* src/Server.cs: Added public IsRunning property to expose server state
+
+2006-01-13  James Willcox  <snorp@snorp.net>
+
+	* src/ServiceLocator.cs (OnServiceResolved): don't fire of a 'Found'
+	event if we already have it.
+
+2006-01-09  Aaron Bockover  <aaron@aaronbock.net>
+
+	* src/ContentWriter.cs:
+	* src/ContentParser.cs: Use Mono.Unix.Native.NativeConvert instead of 
+	UnixConvert
+
+2006-01-08  James Willcox  <snorp@snorp.net>
+
+	* src/ServiceLocator.cs: add ServiceArgs, and use that in
+	ServiceHandler.  Make Service a class instead of struct.
+	* sample/*: updated for the above
+
+2006-01-08  James Willcox  <snorp@snorp.net>
+
+	* configure.ac: bump to 0.3.0
+
+2006-01-08  James Willcox  <snorp@snorp.net>
+
+	* src/ServerLocator.cs: moved to ServiceLocator.cs
+
+2006-01-08  James Willcox  <snorp@snorp.net>
+
+	* src/ServerLocator.cs: added Start() and Stop() methods.
+
+2006-01-07  Aaron Bockover  <aaron@aaronbock.net>
+
+	* sample/SampleClient.cs: Updated to work with changes in src/Database.cs
+
+	* src/ServerLocator.cs: Added a ToString override on Service structure
+	
+	* src/Database.cs: Make Songs IEnumerable instead of an array that is
+	created from the internal ArrayList on each call; added SongAt(index) 
+	method and a SongCount property
+
+	* src/SampleServer.cs: Removed, it's in sample/
+
+
